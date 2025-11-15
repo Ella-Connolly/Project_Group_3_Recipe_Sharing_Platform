@@ -1,4 +1,4 @@
-Project_Group_3_Recipe_Sharing_Platform
+Project_Group_17_Recipe_Sharing_Platform
 
 Project Title
 
