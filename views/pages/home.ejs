@@ -1,47 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Home | Recipe Share</title>
-    <link rel="stylesheet" href="/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RecipeShare</title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
+  <%- include("../partials/nav.ejs") %>
 
-<% include ../partials/navbar %>
+  <section class="hero">
+    <h1>Welcome to RecipeShare</h1>
+    <p>Discover and share your favorite recipes!</p>
+  </section>
 
-<section class="hero">
-  <h1>Welcome to RecipeShare 🍽️</h1>
-  <p>Discover and share your favorite recipes!</p>
-</section>
-
-<section class="featured-section">
-  <h2 class="featured-title">Featured Recipe</h2>
-
-  <div class="recipe-card">
-    <img src="/images/Featured-Image.jfif" alt="">
-
-    <div class="recipe-info">
-      <h3>Creamy Garlic Pasta</h3>
-      <p><strong>Cook Time:</strong> 25 minutes</p>
-      <p><strong>Difficulty:</strong> Easy</p>
-      <p>A creamy, comforting pasta dish loaded with garlic flavor.</p>
-
-      <a href="/recipes/1" class="btn-view">View Recipe</a>
+  <section class="featured-section">
+    <h2 class="featured-title">Featured Recipes</h2>
+    <div class="recipes-container">
+      <% if (featured && featured.length > 0) { %>
+        <% featured.forEach(recipe => { %>
+          <div class="recipe-card">
+            <img src="<%= recipe.images && recipe.images[0] ? recipe.images[0] : '/images/Featured-Image.jfif' %>" alt="<%= recipe.title %>">
+            <div class="recipe-info">
+              <h3><%= recipe.title %></h3>
+              <p><strong>Cook Time:</strong> <%= recipe.cook_time || 'N/A' %> minutes</p>
+              <p><strong>Difficulty:</strong> <%= recipe.difficulty || 'N/A' %></p>
+              <p><%= recipe.description || 'No description available.' %></p>
+              <a href="/recipes/<%= recipe.id %>" class="btn-view">View Recipe</a>
+            </div>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <p>No featured recipes available.</p>
+      <% } %>
     </div>
-  </div>
-</section>
+  </section>
 
-<!--Signup/Login Buttons -->
-<section class="auth-buttons">
-  <a href="/signup" class="btn-signup">Create an Account</a>
-  <a href="/login" class="btn-login">Login</a>
-</section>
-
-<% include ../partials/footer %>
-</body>
-</html>
-
-<% include ../partials/footer %>
+  <%- include("../partials/footer.ejs") %>
 </body>
 </html>

@@ -2,8 +2,10 @@
   "name": "project_group_3_recipe_sharing_platform",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +18,19 @@
   "bugs": {
     "url": "https://github.com/Ella-Connolly/Project_Group_3_Recipe_Sharing_Platform/issues"
   },
-  "homepage": "https://github.com/Ella-Connolly/Project_Group_3_Recipe_Sharing_Platform#readme"
+  "homepage": "https://github.com/Ella-Connolly/Project_Group_3_Recipe_Sharing_Platform#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "multer": "^2.0.2",
+    "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
 }

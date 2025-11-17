@@ -7,12 +7,13 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <% include ../partials/navbar %>
+    <%- include("../partials/nav.ejs") %>
     <main class="container">
         <article class="recipe-detail">
             <h1><%= recipe.title %></h1>
             
-            <img src="<%= /images/Apple-Pie.jfif %>" alt="">
+            <img src="<%= recipe.images && recipe.images[0] ? recipe.images[0] : '/images/Apple-Pie.jfif' %>" alt="">
+
             
             <div class="metadata">
                 <span>Prep Time: <%= recipe.prepTime %></span>
@@ -52,6 +53,6 @@
         </article>
     </main>
 
-    <% include ../partials/footer %>
+    <%- include("../partials/footer.ejs") %>
 </body>
 </html>
