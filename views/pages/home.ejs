@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RecipeShare</title>
+  <title>Recipe Share</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
@@ -11,7 +11,7 @@
   <%- include("../partials/nav.ejs") %>
 
   <section class="hero">
-    <h1>Welcome to RecipeShare</h1>
+    <h1>Welcome to Recipe Share</h1>
     <p>Discover and share your favorite recipes!</p>
   </section>
 
@@ -25,7 +25,6 @@
             <div class="recipe-info">
               <h3><%= recipe.title %></h3>
               <p><strong>Cook Time:</strong> <%= recipe.cook_time || 'N/A' %> minutes</p>
-              <p><strong>Difficulty:</strong> <%= recipe.difficulty || 'N/A' %></p>
               <p><%= recipe.description || 'No description available.' %></p>
               <a href="/recipes/<%= recipe.id %>" class="btn-view">View Recipe</a>
             </div>
