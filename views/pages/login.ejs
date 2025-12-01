@@ -1,0 +1,14 @@
+<% include('partials/header') %>
+<%- include('../partials/nav') %>
+<div class="container">
+    <h2>Login</h2>
+        <form method="post" action="/auth/login">
+            <label>Email or Username</label>
+            <input name="emailOrUsername" required />
+            <label>Password</label>
+            <input name="password" type="password" required />
+            <button type="submit">Login</button>
+        </form>
+</div>
+
+<% include('partials/footer') %>

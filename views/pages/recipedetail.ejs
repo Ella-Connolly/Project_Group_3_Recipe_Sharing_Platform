@@ -7,52 +7,93 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <%- include("../partials/nav.ejs") %>
-    <main class="container">
-        <article class="recipe-detail">
-            <h1><%= recipe.title %></h1>
-            
-            <img src="<%= recipe.images && recipe.images[0] ? recipe.images[0] : '/images/Apple-Pie.jfif' %>" alt="">
+    <% include('../partials/header') %>
+    <%- include('../partials/nav') %>
 
-            
-            <div class="metadata">
-                <span>Prep Time: <%= recipe.prep_time %></span>
-                <span>Cook Time: <%= recipe.cook_time %></span>
-                <span>Servings: <%= recipe.servings %></span>
+<main class="container">
+  <article class="recipe-detail">
+    <h1><%= recipe.title %></h1>
+
+    <img src="<%= recipe.images && recipe.images[0] ? recipe.images[0] : '/images/Apple-Pie.jfif' %>" alt="<%= recipe.title %>">
+
+    <div class="metadata">
+      <span>Prep Time: <%= recipe.prep_time || 0 %> min</span>
+      <span>Cook Time: <%= recipe.cook_time || 0 %> min</span>
+      <span>Servings: <%= recipe.servings || 1 %></span>
+      <% if (recipe.difficulty) { %>
+        <span>Difficulty: <%= recipe.difficulty %></span>
+      <% } %>
+      <% if (recipe.cuisine) { %>
+        <span>Cuisine: <%= recipe.cuisine %></span>
+      <% } %>
+    </div>
+
+    <section class="ingredients">
+      <h2>Ingredients</h2>
+      <% if (recipe.ingredients && recipe.ingredients.length) { %>
+        <ul>
+          <% recipe.ingredients.forEach(item => { %>
+            <li><%= item %></li>
+          <% }) %>
+        </ul>
+      <% } else { %>
+        <p>No ingredients listed.</p>
+      <% } %>
+    </section>
+
+    <section class="instructions">
+      <h2>Instructions</h2>
+      <% if (recipe.instructions && recipe.instructions.length) { %>
+        <ol>
+          <% recipe.instructions.forEach(step => { %>
+            <li><%= step %></li>
+          <% }) %>
+        </ol>
+      <% } else { %>
+        <p>No instructions provided.</p>
+      <% } %>
+    </section>
+
+    <% if (currentUser) { %>
+      <div style="text-align: center; margin-top: 20px;">
+        <a href="/save/<%= recipe.id %>" class="btn-primary">Save Recipe</a>
+      </div>
+    <% } %>
+
+    <section id="comments">
+      <h3>Comments</h3>
+
+      <% if (currentUser) { %>
+        <form action="/comments/create" method="post">
+          <input type="hidden" name="recipe_id" value="<%= recipe.id %>" />
+          <label for="content">Leave a comment</label>
+          <textarea id="content" name="content" rows="3" required></textarea>
+          <button type="submit">Post Comment</button>
+        </form>
+      <% } else { %>
+        <p><a href="/auth/login">Log in</a> to leave a comment.</p>
+      <% } %>
+
+      <div class="comments-list">
+        <% if (comments && comments.length) { %>
+          <% comments.forEach(c => { %>
+            <div class="comment">
+              <div class="comment-meta">
+                <strong><%= c.username || 'Guest' %></strong>
+                <span class="time"><%= new Date(c.created_at).toLocaleString() %></span>
+              </div>
+              <div class="comment-body"><%= c.content %></div>
             </div>
+          <% }) %>
+        <% } else { %>
+          <p>No comments yet — be the first!</p>
+        <% } %>
+      </div>
+    </section>
 
-            <section class="ingredients">
-                <h2>Ingredients</h2>
-                <div class="ingredients-list">
-                    <% recipe.ingredients.forEach(group => { %>
-                        <div class="ingredient-group">
-                            <h3><%= group.title %></h3>
-                            <ul>
-                                <% group.list.forEach(item => { %>
-                                    <li><%= item %></li>
-                                <% }); %>
-                            </ul>
-                        </div>
-                    <% }); %>
-                </div>
-            </section>
+  </article>
+</main>
 
-            <section class="instructions">
-                <h2>Instructions</h2>
-                <ol>
-                    <% recipe.instructions.forEach(step => { %>
-                        <li><%= step %></li>
-                    <% }); %>
-                </ol>
-            </section>
-            
-            <div style="text-align: center; margin-top: 30px;">
-                <a href="/save/<%= recipe.id %>" class="btn-primary">Save Recipe</a>
-            </div>
-            
-        </article>
-    </main>
-
-    <%- include("../partials/footer.ejs") %>
+<%- include('../partials/footer') %>
 </body>
 </html>

@@ -1,0 +1,57 @@
+<% include('../partials/header') %>
+<%- include('../partials/nav') %>
+
+<h2>Upload a Recipe</h2>
+
+<div class="upload-instructions">
+  <h3>How to submit a recipe</h3>
+  <ol>
+    <li>Use a clear, descriptive title (e.g., "Garlic Butter Shrimp").</li>
+    <li>List ingredients one per line, or separated by commas. Include measurements (e.g., "1 tbsp olive oil").</li>
+    <li>Write clear step-by-step instructions. Keep each step short.</li>
+    <li>Select a cuisine (e.g., "Italian", "Mexican") for easier discovery.</li>
+    <li>Upload a photo (optional) — make sure image files are &lt; 5MB.</li>
+    <li>Tag dietary labels like "vegan" or "gluten-free" in the tags field (comma-separated).</li>
+  </ol>
+</div>
+
+<form method="post" action="/routes/recipe.js" enctype="multipart/form-data">
+  <label>Title</label>
+  <input name="title" required />
+
+  <label>Cuisine</label>
+  <input name="cuisine" />
+
+  <label>Ingredients</label>
+  <textarea name="ingredients" rows="4"></textarea>
+
+  <label>Instructions</label>
+  <textarea name="instructions" rows="6" required></textarea>
+
+  <label>Tags</label>
+  <input name="tags" />
+
+  <label>Difficulty</label>
+  <select name="difficulty">
+    <option value="">Select difficulty</option>
+    <option value="Easy">Easy</option>
+    <option value="Medium">Medium</option>
+    <option value="Hard">Hard</option>
+  </select>
+
+  <label>Cook Time</label>
+  <input name="cook_time" type="number" min="0" />
+
+  <label>Prep Time</label>
+  <input name="prep_time" type="number" min="0" />
+
+  <label>Servings</label>
+  <input name="servings" type="number" min="1" />
+
+  <label>Image URL (optional)</label>
+  <input name="images" placeholder="/uploads/myphoto.jpg" />
+
+  <button type="submit">Submit Recipe</button>
+</form>
+
+<% include('../partials/footer') %>

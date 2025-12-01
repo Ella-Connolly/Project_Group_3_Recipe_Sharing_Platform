@@ -228,3 +228,16 @@ footer {
 .btn-secondary:hover {
     background-color: #E8F5E9; 
 }
+
+.upload-instructions {
+  border: 1px solid #ddd;
+  padding: 12px;
+  background: #fbfbfb;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+.comments-list .comment {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
