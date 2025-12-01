@@ -6,24 +6,16 @@ CREATE TABLE IF NOT EXISTS users (
     password_hash TEXT NOT NULL,
     bio TEXT DEFAULT '',
     recipes_uploaded INTEGER DEFAULT 0,
-    created_at TIMESTAMP DEFAULT now()
+    created_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS recipes (
     id SERIAL PRIMARY KEY,
-    title TEXT NOT NULL,
-    description TEXT DEFAULT '',
-    ingredients JSONB DEFAULT '[]'::jsonb,
-    instructions JSONB DEFAULT '[]'::jsonb,
-    tags TEXT[] DEFAULT ARRAY[]::text[],
-    cuisine TEXT DEFAULT '',
-    difficulty TEXT DEFAULT '',
-    cook_time INTEGER DEFAULT 0,
-    prep_time INTEGER DEFAULT 0,
-    servings INTEGER DEFAULT 1,
-    images TEXT[] DEFAULT ARRAY[]::text[],
-    author_id INTEGER REFERENCES users(id) ON DELETE SET NULL,
-    created_at TIMESTAMP DEFAULT now()
+    title VARCHAR(255) NOT NULL,
+    ingredients TEXT NOT NULL,
+    instructions TEXT NOT NULL,
+    user_id INTEGER REFERENCES users(id),
+    created_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS comments (
@@ -31,8 +23,12 @@ CREATE TABLE IF NOT EXISTS comments (
     recipe_id INTEGER NOT NULL REFERENCES recipes(id) ON DELETE CASCADE,
     user_id INTEGER REFERENCES users(id) ON DELETE SET NULL,
     content TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT now()
+    created_at TIMESTAMP DEFAULT NOW()
 );
 
-INSERT INTO recipes (title, description, difficulty, cook_time, images)
-VALUES ('Sample Recipe', 'This is a test recipe', 'Easy', 30, ARRAY['/public/images/Featured-Image.jfif']);
+INSERT INTO recipes (title, ingredients, instructions)
+VALUES (
+    'Sample Recipe',
+    'Ingredient 1, Ingredient 2',
+    'Step 1: Do something. Step 2: Finish.'
+);

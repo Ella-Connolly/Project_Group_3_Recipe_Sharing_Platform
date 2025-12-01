@@ -1,14 +1,39 @@
-<% include('partials/header') %>
+<% include('../partials/header') %>
 <%- include('../partials/nav') %>
+
 <div class="container">
     <h2>Login</h2>
-        <form method="post" action="/auth/login">
-            <label>Email or Username</label>
-            <input name="emailOrUsername" required />
-            <label>Password</label>
-            <input name="password" type="password" required />
-            <button type="submit">Login</button>
-        </form>
+    <form id="loginForm" method="post" action="/auth/login">
+        <label>Email or Username</label>
+        <input name="emailOrUsername" required placeholder="Enter your email or username" />
+
+        <label>Password</label>
+        <input id="password" name="password" type="password" required placeholder="Enter your password" />
+
+        <button type="submit">Login</button>
+    </form>
 </div>
 
-<% include('partials/footer') %>
+<script>
+  //can show the password 
+  const passwordInput = document.getElementById('password');
+
+  const toggleBtn = document.createElement('button');
+  toggleBtn.type = 'button';
+  toggleBtn.textContent = 'Show';
+  toggleBtn.style.marginLeft = '10px';
+
+  toggleBtn.addEventListener('click', () => {
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      toggleBtn.textContent = 'Hide';
+    } else {
+      passwordInput.type = 'password';
+      toggleBtn.textContent = 'Show';
+    }
+  });
+
+  passwordInput.parentNode.insertBefore(toggleBtn, passwordInput.nextSibling);
+</script>
+
+<% include('../partials/footer') %>

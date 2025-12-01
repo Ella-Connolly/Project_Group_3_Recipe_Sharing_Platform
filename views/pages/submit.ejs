@@ -15,15 +15,15 @@
   </ol>
 </div>
 
-<form method="post" action="/routes/recipe.js" enctype="multipart/form-data">
+<form id="recipeForm" method="post" action="/routes/recipe.js" enctype="multipart/form-data">
   <label>Title</label>
-  <input name="title" required />
+  <input id="title" name="title" required />
 
   <label>Cuisine</label>
   <input name="cuisine" />
 
   <label>Ingredients</label>
-  <textarea name="ingredients" rows="4"></textarea>
+  <textarea id="ingredients" name="ingredients" rows="4" required></textarea>
 
   <label>Instructions</label>
   <textarea name="instructions" rows="6" required></textarea>
@@ -53,5 +53,25 @@
 
   <button type="submit">Submit Recipe</button>
 </form>
+
+<script>
+  // ensure title and ingredient are not empty on the form 
+  document.getElementById('recipeForm').addEventListener('submit', function(e) {
+    const title = document.getElementById('title').value.trim();
+    const ingredients = document.getElementById('ingredients').value.trim();
+
+    if (!title) {
+      alert('Please enter a recipe title.');
+      e.preventDefault();
+      return;
+    }
+
+    if (!ingredients) {
+      alert('Please enter at least one ingredient.');
+      e.preventDefault();
+      return;
+    }
+  });
+</script>
 
 <% include('../partials/footer') %>

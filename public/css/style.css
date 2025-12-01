@@ -1,3 +1,13 @@
+/*defines color scheme*/
+:root {
+  --primary: #4CAF50;
+  --primary-dark: #388E3C;
+  --secondary-bg: #E8F5E9;
+  --text-dark: #333;
+  --text-light: #fff;
+  --card-border: #ddd;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;

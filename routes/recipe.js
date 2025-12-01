@@ -36,37 +36,39 @@ router.get("/", async (req, res) => {
   }
 });
 
-//get recipe by ID
+//fetch a single recipe based on ID from database
 router.get("/:id", async (req, res) => {
-  const { id } = req.params;
+  const recipeId = parseInt(req.params.id, 10);
+  if (isNaN(recipeId)) return res.status(400).json({ error: "Invalid recipe ID" });
 
   try {
-    const recipe = await db.query(
-      `SELECT r.*, u.username
+    //username
+    const recipeResult = await db.query(
+      `SELECT r.*, u.username AS author_username
        FROM recipes r
        LEFT JOIN users u ON r.author_id = u.id
        WHERE r.id = $1`,
-      [id]
+      [recipeId]
     );
 
-    if (!recipe.rows.length)
-      return res.status(404).json({ error: "Recipe not found" });
+    if (!recipeResult.rows.length) return res.status(404).json({ error: "Recipe not found" });
 
-    const comments = await db.query(
-      `SELECT c.*, u.username
+    //get comments
+    const commentsResult = await db.query(
+      `SELECT c.*, u.username AS commenter_username
        FROM comments c
        LEFT JOIN users u ON c.user_id = u.id
        WHERE c.recipe_id = $1
        ORDER BY c.created_at DESC`,
-      [id]
+      [recipeId]
     );
 
     res.json({
-      recipe: recipe.rows[0],
-      comments: comments.rows,
+      recipe: recipeResult.rows[0],
+      comments: commentsResult.rows,
     });
   } catch (err) {
-    console.error("DB error:", err);
+    console.error("Error fetching recipe:", err);
     res.status(500).json({ error: "Database error" });
   }
 });
@@ -107,7 +109,7 @@ router.post("/", requireLogin, async (req, res) => {
         images || [],
         req.session.user.id
       ]
-    ); // <-- closing the query properly here
+    );
 
     res.status(201).json(result.rows[0]);
   } catch (err) {
