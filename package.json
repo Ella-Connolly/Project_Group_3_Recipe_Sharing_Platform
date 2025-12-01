@@ -20,8 +20,11 @@
   },
   "homepage": "https://github.com/Ella-Connolly/Project_Group_3_Recipe_Sharing_Platform#readme",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.3",
     "body-parser": "^2.2.0",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "ejs": "^3.1.10",
