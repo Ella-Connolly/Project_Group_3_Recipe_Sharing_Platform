@@ -1,13 +1,16 @@
 const { Pool } = require("pg");
 require("dotenv").config();
 
-const connectionString =
-  process.env.DATABASE_URL ||
-  "postgresql://postgres:postgres@localhost:5432/recipeshare";
-
-const pool = new Pool({ connectionString });
+const pool = new Pool({
+  user: "postgres",
+  password: "postgres",
+  host: "localhost",
+  port: 5432,
+  database: "recipeshare"
+});
 
 module.exports = {
   query: (text, params) => pool.query(text, params),
   pool,
 };
+
