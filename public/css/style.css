@@ -8,10 +8,16 @@
   --card-border: #ddd;
 }
 
+/* added general styling*/
 body {
+  background: #fff8f2;
+  font-family: 'Roboto', sans-serif;
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #fafafa;
+}
+
+h1, h2, h3 {
+    font-family: 'Poppins', sans-serif;
+    color: #795548;
 }
 
 .navbar {
@@ -251,3 +257,133 @@ footer {
   border-bottom: 1px solid #eee;
 }
 
+/* Navigation */
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ff7043; 
+    padding: 12px 30px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.main-nav .logo {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: white;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    opacity: 0.8;
+}
+
+/* Footer */
+.main-footer {
+    background: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 50px;
+}
+
+.recipe-form-container {
+    width: 60%;
+    margin: 40px auto;
+    font-family: 'Poppins', sans-serif;
+}
+
+.recipe-form-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.recipe-form label {
+    display: block;
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+.recipe-form input,
+.recipe-form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    margin-top: 8px;
+    font-size: 1rem;
+}
+
+.recipe-form button {
+    margin-top: 25px;
+    padding: 12px 20px;
+    background: #ff7043;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.recipe-form button:hover {
+    background: #e45e33;
+}
+
+/* signup styling*/
+.signup-container {
+    width: 45%;
+    margin: 80px auto;
+    padding: 40px;
+    background: #f0f4ff;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+}
+
+.signup-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.signup-form label {
+    margin-top: 18px;
+    display: block;
+    font-weight: 600;
+}
+
+.signup-form input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border: 1px solid #9aa5c4;
+    border-radius: 6px;
+}
+
+.signup-form button {
+    margin-top: 25px;
+    width: 100%;
+    padding: 12px;
+    background: #5c6bc0;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.signup-form button:hover {
+    background: #3f4b99;
+}

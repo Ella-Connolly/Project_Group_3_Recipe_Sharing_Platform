@@ -36,6 +36,12 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Render the recipe submission page
+router.get("/submit", requireLogin, (req, res) => {
+  res.render("submit"); // this loads views/submit.ejs
+});
+
+
 //fetch a single recipe based on ID from database
 router.get("/:id", async (req, res) => {
   const recipeId = parseInt(req.params.id, 10);
