@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const db = require("../db");
 const requireLogin = require("../middleware/requireLogin");
+const multer = require("multer");
+const upload = multer({ dest: "public/uploads/" });
+
 
 // LIST / FILTER RECIPES
 router.get("/", async (req, res) => {
@@ -42,11 +45,23 @@ router.get("/", async (req, res) => {
 });
 
 // POST NEW RECIPE
-router.post("/", requireLogin, async (req, res) => {
+router.post("/", requireLogin, upload.array("images"), async (req, res) => {
+  console.log("BODY:", req.body);  // <-- title will show here now
+  console.log("FILES:", req.files);
+
   let {
-    title, description, ingredients, instructions, tags,
-    cuisine, difficulty, cook_time, prep_time, servings, images
+    title,
+    description,
+    ingredients,
+    instructions,
+    tags,
+    cuisine,
+    difficulty,
+    cook_time,
+    prep_time,
+    servings
   } = req.body;
+);
 
   // Convert comma-separated strings into arrays for storage
   ingredients = ingredients ? ingredients.split(",").map(i => i.trim()) : [];
