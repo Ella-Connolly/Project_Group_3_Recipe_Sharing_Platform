@@ -61,7 +61,6 @@ router.post("/", requireLogin, upload.array("images"), async (req, res) => {
     prep_time,
     servings
   } = req.body;
-);
 
   // Convert comma-separated strings into arrays for storage
   ingredients = ingredients ? ingredients.split(",").map(i => i.trim()) : [];
